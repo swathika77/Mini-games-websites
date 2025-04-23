@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini Game Zone</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      color: #fff;
+      text-align: center;
+    }
+
+    header {
+      padding: 40px 20px;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .game-button {
+      background-color: #ffffff20;
+      border: 2px solid #fff;
+      padding: 20px 40px;
+      border-radius: 15px;
+      font-size: 1.2em;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .game-button:hover {
+      background-color: #fff;
+      color: #333;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Mini Game Zone</h1>
+    <p>Choose your favorite game and start playing!</p>
+  </header>
+
+  <div class="button-container">
+    <a href="quick-math.html" class="game-button">Quick Math</a>
+    <a href="rock-paper-scissors.html" class="game-button">Rock Paper Scissors</a>
+    <a href="guess-number.html" class="game-button">Guess the Number</a>
+  </div>
+
+  <footer>
+    <p>© 2025 Mini Game Zone. All rights reserved.</p>
+  </footer>
+</body>
+</html>
