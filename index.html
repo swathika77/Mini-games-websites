@@ -4,241 +4,102 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini Game Zone</title>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: 'Baloo 2', cursive;
-      background: linear-gradient(to bottom, #ffe6f0, #ffb6c1);
-      color: #5e0033;
-    }
-
-    /* Loading screen */
-    #loader {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: #ffb6c1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-
-    .spinner {
-      border: 10px solid #ffeef8;
-      border-top: 10px solid #ff1493;
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #add8e6, #ffc0cb);
+      color: #333;
+      text-align: center;
     }
 
     header {
-      background: linear-gradient(45deg, #ff69b4, #ff1493);
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-      border-bottom: 5px solid #cc3366;
+      background-color: #ffccf9;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
-    header h1 { font-size: 3.5em; margin: 0; }
-    header p { font-size: 1.4em; margin: 10px 0; }
+    h1 {
+      font-size: 3em;
+      color: #444;
+      margin-bottom: 10px;
+    }
 
-    .coin-counter {
-      background: #ffeef8;
-      color: #cc0066;
-      display: inline-block;
-      padding: 10px 25px;
+    p {
       font-size: 1.2em;
-      border-radius: 25px;
-      margin-top: 15px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      margin: 8px 0;
     }
 
-    nav {
-      background-color: #ff66a3;
+    .button-container {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 10px 0;
+      margin: 40px;
       gap: 20px;
     }
 
-    nav a {
+    .game-button {
+      background-color: #4fc3f7;
       color: white;
-      font-weight: bold;
+      padding: 20px 30px;
+      border: none;
+      border-radius: 15px;
       text-decoration: none;
-      padding: 10px 20px;
-      background: #cc3366;
-      border-radius: 12px;
-      transition: transform 0.2s;
+      font-size: 1.2em;
+      transition: all 0.3s ease;
     }
 
-    nav a:hover {
-      transform: scale(1.1);
-      background: #99004d;
-    }
-
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .game-card {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      padding: 30px;
-      text-align: center;
-      transition: transform 0.3s;
-    }
-
-    .game-card:hover {
+    .game-button:hover {
+      background-color: #0288d1;
       transform: scale(1.05);
     }
 
-    .game-card i {
-      font-size: 3em;
-      margin-bottom: 15px;
-      color: #ff66b2;
-    }
-
-    .game-card a {
-      display: inline-block;
-      margin-top: 10px;
-      background: #ff1493;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: background 0.3s;
-    }
-
-    .game-card a:hover {
-      background: #cc0066;
-    }
-
-    .funny-image {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    .funny-image img {
-      max-width: 300px;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
     footer {
-      background: #ff66a3;
-      padding: 20px;
-      text-align: center;
-      color: white;
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #777;
     }
 
-    .music-toggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #ff66a3;
-      border: none;
-      padding: 10px;
-      border-radius: 50%;
-      color: white;
-      font-size: 1.5em;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    img {
+      margin-top: 30px;
+      width: 200px;
+      border-radius: 20px;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Mini Game Zone</h1>
+    <p>Play • Laugh • Learn!</p>
+    <p>Welcome, <span id="playerGreeting"></span>!</p>
+    <p>Total Coins: <span id="totalCoins">0</span></p>
+  </header>
 
-<div id="loader"><div class="spinner"></div></div>
-
-<audio id="hoverSound" src="https://www.soundjay.com/button/button-3.mp3" preload="auto"></audio>
-<audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-funkyelement.mp3" loop></audio>
-
-<button class="music-toggle" onclick="toggleMusic()"><i class="fas fa-music"></i></button>
-
-<header>
-  <h1>Mini Game Zone</h1>
-  <p>Play • Laugh • Learn!</p>
-  <div class="coin-counter"><i class="fas fa-coins"></i> Overall Coins: <span id="totalCoins">0</span></div>
-</header>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="memory-game.html">Memory Game</a>
-</nav>
-
-<div class="game-grid">
-  <div class="game-card">
-    <i class="fas fa-calculator"></i>
-    <h3>Quick Math</h3>
-    <a href="quick-math.html" onmouseover="playHover()">Play Now</a>
+  <div class="button-container">
+    <a href="quick-math.html" class="game-button">Quick Math</a>
+    <a href="guess-number.html" class="game-button">Guess the Number</a>
+    <a href="rock-paper-scissors.html" class="game-button">Rock Paper Scissors</a>
+    <a href="memory-game.html" class="game-button">Memory Game</a>
   </div>
-  <div class="game-card">
-    <i class="fas fa-question"></i>
-    <h3>Guess the Number</h3>
-    <a href="guess-number.html" onmouseover="playHover()">Play Now</a>
-  </div>
-  <div class="game-card">
-    <i class="fas fa-hand-peace"></i>
-    <h3>Rock Paper Scissors</h3>
-    <a href="rock-paper-scissors.html" onmouseover="playHover()">Play Now</a>
-  </div>
-  <div class="game-card">
-    <i class="fas fa-brain"></i>
-    <h3>Memory Game</h3>
-    <a href="memory-game.html" onmouseover="playHover()">Play Now</a>
-  </div>
-</div>
 
-<div class="funny-image">
-  <img src="https://i.imgur.com/Z6f5VnP.png" alt="Funny character" />
-</div>
+  <img src="https://cdn-icons-png.flaticon.com/512/477/477102.png" alt="Funny game image" />
 
-<footer>
-  <p>© 2025 Mini Game Zone. Created with pink power for fun learning!</p>
-</footer>
+  <footer>
+    <p>© 2025 Mini Game Zone. Created for fun learning!</p>
+  </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<script>
-  // Loading screen
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("loader").style.display = "none";
-      confetti(); // Trigger confetti on load
-    }, 1200);
-  });
-
-  // Sound
-  function playHover() {
-    document.getElementById('hoverSound').play();
-  }
-
-  function toggleMusic() {
-    const music = document.getElementById('bgMusic');
-    if (music.paused) {
-      music.play();
-    } else {
-      music.pause();
+  <script>
+    // Redirect to login if name is not set
+    if (!localStorage.getItem('playerName')) {
+      window.location.href = 'login.html';
     }
-  }
 
-  // Load coins
-  document.getElementById('totalCoins').innerText = localStorage.getItem('totalCoins') || 0;
-</script>
+    // Set player name greeting
+    const player = localStorage.getItem('playerName');
+    document.getElementById('playerGreeting').innerText = player || 'Guest';
 
+    // Show total coins
+    document.getElementById('totalCoins').innerText = localStorage.getItem('totalCoins') || 0;
+  </script>
 </body>
 </html>
