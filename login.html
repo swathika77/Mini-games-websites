@@ -3,94 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
+  <title>Login - Mini Game Zone</title>
   <style>
     body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #cceeff, #ffffff);
       display: flex;
-      height: 100vh;
       justify-content: center;
       align-items: center;
-      background: #111;
-      color: white;
-      font-family: 'Comic Sans MS', cursive;
+      height: 100vh;
+      margin: 0;
     }
+
     .login-box {
-      background: #222;
+      background: #fff;
       padding: 40px;
       border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
       text-align: center;
     }
-    input {
-      padding: 10px;
-      border: none;
+
+    .login-box h2 {
       margin-bottom: 20px;
-      width: 200px;
+      color: #0077cc;
+    }
+
+    .login-box input {
+      padding: 10px;
+      font-size: 1em;
+      width: 100%;
+      margin-bottom: 20px;
+      border: 2px solid #0077cc;
       border-radius: 10px;
     }
-    button {
-      padding: 10px 20px;
-      background: orange;
+
+    .login-box button {
+      background: #0077cc;
+      color: #fff;
       border: none;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-    /* Pop-up styles */
-    .popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.7);
-      padding: 30px;
-      border-radius: 15px;
-      text-align: center;
-    }
-    .popup h2 {
-      color: #f39c12;
-    }
-    .popup button {
-      background: #f39c12;
-      color: #000;
-      padding: 10px 20px;
-      border: none;
+      padding: 10px 25px;
+      font-size: 1em;
       border-radius: 10px;
       cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background: #005fa3;
     }
   </style>
 </head>
 <body>
+
   <div class="login-box">
     <h2>Enter Your Name</h2>
-    <input type="text" id="username" placeholder="Your name" />
-    <br />
-    <button onclick="login()">Login</button>
-  </div>
-
-  <!-- Welcome Pop-up -->
-  <div id="welcome-popup" class="popup">
-    <h2>Welcome, <span id="player-name"></span>!</h2>
-    <button onclick="redirectToHome()">Proceed to Game Zone</button>
+    <input type="text" id="playerName" placeholder="Your name..." />
+    <button onclick="login()">Start</button>
   </div>
 
   <script>
     function login() {
-      const name = document.getElementById("username").value;
-      if (name.trim() !== "") {
+      const name = document.getElementById("playerName").value.trim();
+      if (name) {
         localStorage.setItem("username", name);
-        document.getElementById("player-name").textContent = name;
-        document.getElementById("welcome-popup").style.display = 'block'; // Show the welcome popup
-        // Hide the login form
-        document.querySelector(".login-box").style.display = 'none';
+        alert("Welcome, " + name + "!");
+        window.location.href = "index.html";
       } else {
-        alert("Please enter a valid name!");
+        alert("Please enter your name.");
       }
     }
-
-    // Redirect to homepage after the user clicks "Proceed"
-    function redirectToHome() {
-      window.location.href = "index.html"; // Redirect to the homepage
-    }
   </script>
+
 </body>
 </html>
