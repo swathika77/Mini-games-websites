@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Game</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      background-color: #fef8e7;
+    }
+    h1 {
+      color: #ff6f61;
+    }
+    .game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .card {
+      width: 80px;
+      height: 80px;
+      background-color: #ffcc70;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .matched {
+      background-color: #a4ffb4;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Memory Game</h1>
+  <p>Match the pairs!</p>
+  <div class="game-board" id="board"></div>
+
+  <script>
+    const board = document.getElementById("board");
+    const emojis = ["🍓","🍌","🍇","🍉","🍓","🍌","🍇","🍉"];
+    let shuffled = emojis.sort(() => 0.5 - Math.random());
+    let picked = [], matched = [];
+
+    shuffled.forEach((emoji, index) => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.dataset.index = index;
+      card.textContent = "";
+      board.appendChild(card);
+
+      card.addEventListener("click", () => {
+        if (picked.length < 2 && !picked.includes(index)) {
+          card.textContent = emoji;
+          picked.push(index);
+
+          if (picked.length === 2) {
+            const [a, b] = picked;
+            if (shuffled[a] === shuffled[b]) {
+              matched.push(a, b);
+              setTimeout(() => {
+                document.querySelectorAll(".card")[a].classList.add("matched");
+                document.querySelectorAll(".card")[b].classList.add("matched");
+              }, 500);
+            } else {
+              setTimeout(() => {
+                document.querySelectorAll(".card")[a].textContent = "";
+                document.querySelectorAll(".card")[b].textContent = "";
+              }, 800);
+            }
+            picked = [];
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
