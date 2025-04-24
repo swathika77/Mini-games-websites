@@ -4,37 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini Game Zone</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0a74da, #4e9fc7);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #111;
       color: #fff;
-      overflow-x: hidden;
+      position: relative;
     }
 
     header {
       text-align: center;
-      padding: 50px;
-      background: rgba(0, 0, 0, 0.5);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      padding: 30px;
+      background: #222;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
       position: relative;
     }
 
     h1 {
-      font-size: 4em;
+      font-size: 3em;
       margin: 0;
       color: #f39c12;
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      animation: fadeIn 2s ease-in-out;
     }
 
-    p {
-      font-size: 1.2em;
-      color: #f0f0f0;
-      margin-top: 10px;
+    .username {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #f39c12;
     }
 
     .game-grid {
@@ -42,168 +41,102 @@
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       padding: 40px;
-      justify-items: center;
-      display: none; /* Hidden until user is logged in */
     }
 
     .game-card {
-      background: #222;
+      background: #1e1e1e;
       border-radius: 20px;
       padding: 20px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     }
 
     .game-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(243, 156, 18, 0.6);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(243, 156, 18, 0.6);
     }
 
     .game-card img {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       margin-bottom: 15px;
-      transition: transform 0.3s ease;
+      animation: bounce 1.5s infinite;
     }
 
-    .game-card:hover img {
-      transform: rotate(15deg);
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     .game-card h2 {
       color: #f39c12;
       margin: 10px 0 5px;
-      font-size: 1.6em;
     }
 
     .game-card p {
-      font-size: 1em;
+      font-size: 0.9em;
       color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .score {
+      color: #00ff99;
       margin-bottom: 15px;
+      font-weight: bold;
     }
 
     .game-card a {
       background: #f39c12;
       color: #000;
       text-decoration: none;
-      padding: 12px 30px;
+      padding: 10px 20px;
       border-radius: 10px;
       font-weight: bold;
-      text-transform: uppercase;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .game-card a:hover {
-      background: #ff6b00;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     }
 
     footer {
       text-align: center;
       padding: 20px;
       color: #aaa;
-      background: rgba(0, 0, 0, 0.5);
+      background: #222;
     }
-
-    .login-container {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-      text-align: center;
-      width: 300px;
-      margin: 100px auto;
-    }
-
-    .login-container input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-      font-size: 1em;
-    }
-
-    .login-btn {
-      background: #f39c12;
-      color: #000;
-      padding: 10px 20px;
-      font-size: 1.2em;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .login-btn:hover {
-      background: #ff6b00;
-    }
-
-    .error {
-      color: red;
-      margin-top: 10px;
-      font-size: 0.9em;
-    }
-
-    /* User name in top-right corner */
-    .username {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 1.2em;
-      color: #fff;
-      font-weight: bold;
-    }
-
   </style>
 </head>
 <body>
   <header>
     <h1>Mini Game Zone</h1>
+    <div class="username" id="username">Hi, Player!</div>
     <p>Fun & Learning Games for Kids</p>
-    <div class="username" id="username"></div> <!-- User's name will appear here -->
   </header>
 
-  <!-- Login Section -->
-  <div class="login-container" id="login-container">
-    <h2>Login</h2>
-    <form onsubmit="return validateLogin()">
-      <input type="text" id="name" placeholder="Enter your name" required/>
-      <button type="submit" class="login-btn">Login</button>
-    </form>
-    <p class="error" id="error-message"></p>
-  </div>
-
-  <!-- Game Grid (Hidden until login) -->
-  <div class="game-grid" id="game-grid">
+  <div class="game-grid">
     <div class="game-card">
       <img src="https://cdn-icons-png.flaticon.com/512/149/149852.png" alt="Memory Game">
       <h2>Memory Game</h2>
       <p>Test your memory with fun and colorful cards!</p>
-      <p id="memory-score">Score: 0</p>
+      <div class="score">Score: 0</div>
       <a href="memory-game.html">Play Now</a>
     </div>
     <div class="game-card">
       <img src="https://cdn-icons-png.flaticon.com/512/4359/4359943.png" alt="Fruit Ninja">
       <h2>Fruit Ninja</h2>
       <p>Slice fruits with precision and score big!</p>
-      <p id="fruit-ninja-score">Score: 0</p>
+      <div class="score">Score: 0</div>
       <a href="fruit-ninja.html">Play Now</a>
     </div>
     <div class="game-card">
       <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Rock Paper Scissors">
       <h2>Rock Paper Scissors</h2>
       <p>Classic challenge against the computer.</p>
-      <p id="rock-paper-scissors-score">Score: 0</p>
+      <div class="score">Score: 0</div>
       <a href="rock-paper-scissors.html">Play Now</a>
     </div>
     <div class="game-card">
       <img src="https://cdn-icons-png.flaticon.com/512/1297/1297408.png" alt="Quick Math">
       <h2>Quick Math</h2>
       <p>Solve math problems quickly and beat the clock!</p>
-      <p id="quick-math-score">Score: 0</p>
+      <div class="score">Score: 0</div>
       <a href="quick-math.html">Play Now</a>
     </div>
   </div>
@@ -213,35 +146,16 @@
   </footer>
 
   <script>
-    // Check if user is logged in from localStorage
-    if (localStorage.getItem('loggedIn') === 'true') {
-      // Show game grid and hide login
-      document.getElementById('login-container').style.display = 'none';
-      document.getElementById('game-grid').style.display = 'grid';
-      // Retrieve and display stored name and scores
-      document.getElementById('username').textContent = 'Welcome, ' + localStorage.getItem('userName');
-      document.getElementById('memory-score').textContent = 'Score: ' + (localStorage.getItem('memoryScore') || 0);
-      document.getElementById('fruit-ninja-score').textContent = 'Score: ' + (localStorage.getItem('fruitNinjaScore') || 0);
-      document.getElementById('rock-paper-scissors-score').textContent = 'Score: ' + (localStorage.getItem('rockPaperScissorsScore') || 0);
-      document.getElementById('quick-math-score').textContent = 'Score: ' + (localStorage.getItem('quickMathScore') || 0);
+    // Redirect to login if not logged in
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      window.location.href = 'login.html';
     }
 
-    // Login validation function
-    function validateLogin() {
-      var name = document.getElementById('name').value;
-
-      if (name.trim() === '') {
-        document.getElementById('error-message').textContent = 'Please enter your name!';
-        return false;
-      }
-
-      // Save user's name and login status in localStorage
-      localStorage.setItem('userName', name);
-      localStorage.setItem('loggedIn', 'true');
-
-      // Redirect to the same page to load the game grid
-      location.reload();
-    }
+    // Display username
+    document.addEventListener('DOMContentLoaded', () => {
+      const name = localStorage.getItem('userName') || 'Player';
+      document.getElementById('username').textContent = 'Hi, ' + name + '!';
+    });
   </script>
 </body>
 </html>
