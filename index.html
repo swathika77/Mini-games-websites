@@ -4,144 +4,113 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini Game Zone</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: #111;
-      color: #fff;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to right, #dfefff, #cce0ff);
+      color: #003366;
     }
 
-    /* Header Section */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 30px;
-      background: #222;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      padding: 20px 40px;
+      background: #0055aa;
+      color: white;
     }
 
-    h1 {
-      font-size: 3em;
-      color: #f39c12;
+    header h1 {
+      font-size: 2.5em;
       margin: 0;
-      display: flex;
-      align-items: center;
+      font-weight: bold;
+      animation: pop 1s ease-out;
     }
 
-    .logo {
-      width: 50px;
-      margin-right: 20px;
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     .user-info {
-      color: #f39c12;
-      font-size: 1.2em;
       display: flex;
       align-items: center;
+      font-size: 1.1em;
     }
 
-    .avatar {
-      width: 40px;
-      height: 40px;
+    .user-info img {
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       margin-left: 10px;
     }
 
-    /* Mini Games Section */
-    .game-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background: #333;
-      margin-bottom: 20px;
-    }
-
-    .game-header h2 {
-      color: #fff;
-      font-size: 2.5em;
-    }
-
-    /* Game Grid */
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      padding: 40px;
+      padding: 30px;
     }
 
     .game-card {
-      background: #1e1e1e;
-      border-radius: 20px;
-      padding: 20px;
+      background: #ffffff;
+      border-radius: 15px;
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .game-card:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(243, 156, 18, 0.6);
+      box-shadow: 0 0 25px rgba(0,85,170,0.4);
     }
 
     .game-card img {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 15px;
-      animation: bounce 1.5s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
     }
 
     .game-card h2 {
-      color: #f39c12;
-      margin: 10px 0 5px;
+      margin: 10px 0;
+      color: #0055aa;
     }
 
     .game-card p {
+      color: #555;
       font-size: 0.9em;
-      color: #ccc;
-      margin-bottom: 15px;
     }
 
     .game-card a {
-      background: #f39c12;
-      color: #000;
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #0055aa;
+      color: white;
+      border-radius: 8px;
       text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 10px;
       font-weight: bold;
     }
 
     footer {
       text-align: center;
       padding: 20px;
-      color: #aaa;
-      background: #222;
+      background: #0055aa;
+      color: white;
     }
   </style>
 </head>
 <body>
+
   <header>
+    <h1>Mini Games</h1>
     <div class="user-info">
-      <h1><img class="logo" src="https://cdn-icons-png.flaticon.com/512/149/149852.png" alt="Logo" /> Mini Game Zone</h1>
-      <div>
-        <p>Welcome, <span id="user-name">Player</span>!</p>
-        <img id="user-avatar" class="avatar" src="https://i.pinimg.com/originals/64/2b/4d/642b4d91b0181d02603427fe39cc94e4.png" alt="Avatar" />
-      </div>
+      Welcome, <span id="user-name">Player</span>
+      <img id="user-avatar" src="https://cdn-icons-png.flaticon.com/512/2922/2922561.png" alt="Avatar">
     </div>
   </header>
-
-  <div class="game-header">
-    <h2>Mini Games</h2>
-    <a href="login.html" style="color: #f39c12; text-decoration: none;">Logout</a>
-  </div>
 
   <div class="game-grid">
     <div class="game-card">
@@ -150,7 +119,36 @@
       <p>Test your memory with fun and colorful cards!</p>
       <a href="memory-game.html">Play Now</a>
     </div>
-    <!-- Add more game cards here -->
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/4359/4359943.png" alt="Fruit Ninja">
+      <h2>Fruit Ninja</h2>
+      <p>Slice fruits with precision and score big!</p>
+      <a href="fruit-ninja.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/846/846448.png" alt="Subway Surfers">
+      <h2>Subway Surfers</h2>
+      <p>Dodge trains and collect coins in this endless runner!</p>
+      <a href="subway-surfers.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2784/2784468.png" alt="Candy Crush">
+      <h2>Candy Crush</h2>
+      <p>Match candies and clear the sweet puzzle board!</p>
+      <a href="candy-crush.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/919/919837.png" alt="Temple Run">
+      <h2>Temple Run</h2>
+      <p>Run, jump and escape the temple with treasures!</p>
+      <a href="temple-run.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/4086/4086825.png" alt="Make Up Game">
+      <h2>Make Up Game</h2>
+      <p>Create stunning looks and express your style!</p>
+      <a href="makeup-game.html">Play Now</a>
+    </div>
   </div>
 
   <footer>
@@ -158,13 +156,9 @@
   </footer>
 
   <script>
-    const user = localStorage.getItem("username");
-    const avatar = localStorage.getItem("avatar") || "https://i.pinimg.com/originals/64/2b/4d/642b4d91b0181d02603427fe39cc94e4.png"; // Default Avatar
-
-    if (user) {
-      document.getElementById("user-name").textContent = user;
-      document.getElementById("user-avatar").src = avatar;
-    }
+    const user = localStorage.getItem("username") || "Player";
+    document.getElementById("user-name").textContent = user;
   </script>
+
 </body>
 </html>
