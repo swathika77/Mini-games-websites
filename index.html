@@ -7,74 +7,79 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #74ebd5, #acb6e5);
-      color: #fff;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #ffe4b5;
+      color: #333;
       text-align: center;
     }
 
     header {
-      padding: 40px 20px;
-      background-color: rgba(0, 0, 0, 0.2);
+      background-color: #ffcc00;
+      padding: 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
 
     h1 {
       font-size: 3em;
-      margin-bottom: 10px;
+      color: #444;
     }
 
     p {
       font-size: 1.2em;
-      margin-bottom: 40px;
+      margin-top: 10px;
     }
 
     .button-container {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+      margin: 40px;
       gap: 20px;
-      padding: 20px;
     }
 
     .game-button {
-      background-color: #ffffff20;
-      border: 2px solid #fff;
-      padding: 20px 40px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px 30px;
+      border: none;
       border-radius: 15px;
-      font-size: 1.2em;
-      color: #fff;
       text-decoration: none;
-      transition: all 0.3s ease;
+      font-size: 1.2em;
+      transition: background-color 0.3s ease;
     }
 
     .game-button:hover {
-      background-color: #fff;
-      color: #333;
-      transform: scale(1.05);
+      background-color: #45a049;
     }
 
     footer {
       margin-top: 50px;
       font-size: 0.9em;
-      opacity: 0.8;
+      color: #777;
+    }
+
+    img {
+      margin-top: 30px;
+      width: 200px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to Mini Game Zone</h1>
-    <p>Choose your favorite game and start playing!</p>
+    <h1>Mini Game Zone</h1>
+    <p>Fun and learning games for kids!</p>
   </header>
 
   <div class="button-container">
     <a href="quick-math.html" class="game-button">Quick Math</a>
-    <a href="rock-paper-scissors.html" class="game-button">Rock Paper Scissors</a>
     <a href="guess-number.html" class="game-button">Guess the Number</a>
+    <a href="rock-paper-scissors.html" class="game-button">Rock Paper Scissors</a>
   </div>
 
+  <img src="https://cdn-icons-png.flaticon.com/512/1998/1998617.png" alt="Fun Game Image">
+
   <footer>
-    <p>© 2025 Mini Game Zone. All rights reserved.</p>
+    <p>© 2025 Mini Game Zone. Created for fun learning!</p>
   </footer>
 </body>
 </html>
