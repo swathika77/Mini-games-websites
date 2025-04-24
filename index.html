@@ -1,66 +1,95 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini Game Zone</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Fredoka One', cursive;
-      background-color: #0f0f0f;
-      color: #fff;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #ffe4b5;
+      color: #333;
+      text-align: center;
     }header {
-  padding: 20px;
-  text-align: center;
-  background-color: #1f1f1f;
+  background-color: #ffcc00;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-header h1 {
+h1 {
   font-size: 3em;
-  margin: 0;
-  color: #ffcc00;
+  color: #444;
 }
 
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+p {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 40px;
   gap: 20px;
-  padding: 20px;
+}
+
+.game-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px 30px;
+  border: none;
+  border-radius: 15px;
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease;
+}
+
+.game-button:hover {
+  background-color: #45a049;
 }
 
 .game-card {
-  background-color: #1a1a1a;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-
-.game-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
-}
-
-.game-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
-.game-card h3 {
-  margin: 10px;
-  font-size: 1.2em;
+  display: inline-block;
   text-align: center;
+  margin: 20px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.game-card:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+.game-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.tooltip {
+  display: none;
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
   color: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.game-card:hover .tooltip {
+  display: block;
 }
 
 footer {
-  text-align: center;
-  padding: 20px;
+  margin-top: 50px;
   font-size: 0.9em;
-  color: #aaa;
+  color: #777;
+}
+
+img.logo {
+  margin-top: 30px;
+  width: 200px;
 }
 
   </style>
@@ -68,25 +97,20 @@ footer {
 <body>
   <header>
     <h1>Mini Game Zone</h1>
-  </header>  <div class="game-grid">
-    <a href="memory-game.html" class="game-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png" alt="Memory Game" />
-      <h3>Memory Game</h3>
-    </a>
-    <a href="fruit-ninja.html" class="game-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/8832/8832807.png" alt="Fruit Ninja" />
-      <h3>Fruit Ninja</h3>
-    </a>
-    <a href="rock-paper-scissors.html" class="game-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="Rock Paper Scissors" />
-      <h3>Rock Paper Scissors</h3>
-    </a>
-    <a href="quick-math.html" class="game-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="Quick Math" />
-      <h3>Quick Math</h3>
-    </a>
-  </div>  <footer>
-    <p>© 2025 Mini Game Zone. Created for fun and learning!</p>
+    <p>Fun and learning games for kids!</p>
+  </header>  <div class="button-container">
+    <a href="quick-math.html" class="game-button">Quick Math</a>
+    <a href="rock-paper-scissors.html" class="game-button">Rock Paper Scissors</a><!-- Fruit Ninja Game Card -->
+<div class="game-card">
+  <a href="fruit-ninja.html">
+    <img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" alt="Fruit Ninja" class="game-icon" />
+    <p>Fruit Ninja</p>
+  </a>
+  <div class="tooltip">Swipe to slice the fruits. Avoid bombs!</div>
+</div>
+
+  </div>  <img src="https://cdn-icons-png.flaticon.com/512/1998/1998617.png" alt="Fun Game Image" class="logo">  <footer>
+    <p>© 2025 Mini Game Zone. Created for fun learning!</p>
   </footer>
 </body>
 </html>
