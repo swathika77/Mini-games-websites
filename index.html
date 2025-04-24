@@ -7,38 +7,52 @@
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
       font-family: 'Baloo 2', cursive;
-      background: linear-gradient(to bottom, #cceeff, #99ccff);
-      color: #003366;
+      background: linear-gradient(to bottom, #ffe6f0, #ffb6c1);
+      color: #5e0033;
+    }
+
+    /* Loading screen */
+    #loader {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #ffb6c1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .spinner {
+      border: 10px solid #ffeef8;
+      border-top: 10px solid #ff1493;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     header {
-      background: linear-gradient(45deg, #007BFF, #00BFFF);
+      background: linear-gradient(45deg, #ff69b4, #ff1493);
       color: white;
       padding: 40px 20px;
       text-align: center;
-      border-bottom: 5px solid #0066cc;
+      border-bottom: 5px solid #cc3366;
     }
 
-    header h1 {
-      font-size: 3.5em;
-      margin: 0;
-    }
-
-    header p {
-      font-size: 1.4em;
-      margin: 10px 0;
-    }
+    header h1 { font-size: 3.5em; margin: 0; }
+    header p { font-size: 1.4em; margin: 10px 0; }
 
     .coin-counter {
-      background: #e0f0ff;
-      color: #003366;
+      background: #ffeef8;
+      color: #cc0066;
       display: inline-block;
       padding: 10px 25px;
       font-size: 1.2em;
@@ -47,13 +61,8 @@
       box-shadow: 0 3px 6px rgba(0,0,0,0.2);
     }
 
-    .coin-counter i {
-      color: gold;
-      margin-right: 10px;
-    }
-
     nav {
-      background-color: #3399ff;
+      background-color: #ff66a3;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -66,14 +75,14 @@
       font-weight: bold;
       text-decoration: none;
       padding: 10px 20px;
-      background: #005f99;
+      background: #cc3366;
       border-radius: 12px;
       transition: transform 0.2s;
     }
 
     nav a:hover {
       transform: scale(1.1);
-      background: #004080;
+      background: #99004d;
     }
 
     .game-grid {
@@ -101,18 +110,13 @@
     .game-card i {
       font-size: 3em;
       margin-bottom: 15px;
-      color: #3399ff;
-    }
-
-    .game-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.5em;
+      color: #ff66b2;
     }
 
     .game-card a {
       display: inline-block;
       margin-top: 10px;
-      background: #007BFF;
+      background: #ff1493;
       color: white;
       padding: 10px 20px;
       text-decoration: none;
@@ -121,7 +125,7 @@
     }
 
     .game-card a:hover {
-      background: #0056b3;
+      background: #cc0066;
     }
 
     .funny-image {
@@ -136,80 +140,105 @@
     }
 
     footer {
-      background: #3399ff;
+      background: #ff66a3;
       padding: 20px;
       text-align: center;
       color: white;
-      font-size: 0.95em;
     }
 
-    .social-icons a {
-      margin: 0 10px;
+    .music-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #ff66a3;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
       color: white;
-      font-size: 1.4em;
-      transition: color 0.3s;
-    }
-
-    .social-icons a:hover {
-      color: #ffcc00;
+      font-size: 1.5em;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Mini Game Zone</h1>
-    <p>Play • Learn • Laugh!</p>
-    <div class="coin-counter">
-      <i class="fas fa-coins"></i> Overall Coins: <span id="totalCoins">0</span>
-    </div>
-  </header>
+<div id="loader"><div class="spinner"></div></div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="memory-game.html">Memory Game</a>
-    <a href="#">More Games</a>
-  </nav>
+<audio id="hoverSound" src="https://www.soundjay.com/button/button-3.mp3" preload="auto"></audio>
+<audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-funkyelement.mp3" loop></audio>
 
-  <div class="game-grid">
-    <div class="game-card">
-      <i class="fas fa-plus-circle"></i>
-      <h3>Quick Math</h3>
-      <a href="quick-math.html">Play Now</a>
-    </div>
-    <div class="game-card">
-      <i class="fas fa-question-circle"></i>
-      <h3>Guess the Number</h3>
-      <a href="guess-number.html">Play Now</a>
-    </div>
-    <div class="game-card">
-      <i class="fas fa-hand-rock"></i>
-      <h3>Rock Paper Scissors</h3>
-      <a href="rock-paper-scissors.html">Play Now</a>
-    </div>
-    <div class="game-card">
-      <i class="fas fa-brain"></i>
-      <h3>Memory Game</h3>
-      <a href="memory-game.html">Play Now</a>
-    </div>
+<button class="music-toggle" onclick="toggleMusic()"><i class="fas fa-music"></i></button>
+
+<header>
+  <h1>Mini Game Zone</h1>
+  <p>Play • Laugh • Learn!</p>
+  <div class="coin-counter"><i class="fas fa-coins"></i> Overall Coins: <span id="totalCoins">0</span></div>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="memory-game.html">Memory Game</a>
+</nav>
+
+<div class="game-grid">
+  <div class="game-card">
+    <i class="fas fa-calculator"></i>
+    <h3>Quick Math</h3>
+    <a href="quick-math.html" onmouseover="playHover()">Play Now</a>
   </div>
-
-  <div class="funny-image">
-    <img src="https://i.imgur.com/3u1h7YF.png" alt="Funny cartoon character laughing" />
+  <div class="game-card">
+    <i class="fas fa-question"></i>
+    <h3>Guess the Number</h3>
+    <a href="guess-number.html" onmouseover="playHover()">Play Now</a>
   </div>
+  <div class="game-card">
+    <i class="fas fa-hand-peace"></i>
+    <h3>Rock Paper Scissors</h3>
+    <a href="rock-paper-scissors.html" onmouseover="playHover()">Play Now</a>
+  </div>
+  <div class="game-card">
+    <i class="fas fa-brain"></i>
+    <h3>Memory Game</h3>
+    <a href="memory-game.html" onmouseover="playHover()">Play Now</a>
+  </div>
+</div>
 
-  <footer>
-    <p>© 2025 Mini Game Zone. Created for fun learning!</p>
-    <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook-square"></i></a>
-      <a href="#"><i class="fab fa-twitter-square"></i></a>
-      <a href="#"><i class="fab fa-youtube-square"></i></a>
-    </div>
-  </footer>
+<div class="funny-image">
+  <img src="https://i.imgur.com/Z6f5VnP.png" alt="Funny character" />
+</div>
 
-  <script>
-    document.getElementById('totalCoins').innerText = localStorage.getItem('totalCoins') || 0;
-  </script>
+<footer>
+  <p>© 2025 Mini Game Zone. Created with pink power for fun learning!</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  // Loading screen
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("loader").style.display = "none";
+      confetti(); // Trigger confetti on load
+    }, 1200);
+  });
+
+  // Sound
+  function playHover() {
+    document.getElementById('hoverSound').play();
+  }
+
+  function toggleMusic() {
+    const music = document.getElementById('bgMusic');
+    if (music.paused) {
+      music.play();
+    } else {
+      music.pause();
+    }
+  }
+
+  // Load coins
+  document.getElementById('totalCoins').innerText = localStorage.getItem('totalCoins') || 0;
+</script>
+
 </body>
 </html>
