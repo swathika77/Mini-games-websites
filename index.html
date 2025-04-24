@@ -1,90 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mini Game Zone</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: #ffe4b5;
-      color: #333;
-      text-align: center;
-    }
+header {
+  background-color: #ffcc00;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
 
-    header {
-      background-color: #ffcc00;
-      padding: 30px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
+h1 {
+  font-size: 3.5em;
+  color: #444;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
 
-    h1 {
-      font-size: 3em;
-      color: #444;
-    }
+p {
+  font-size: 1.5em;
+  margin-top: 10px;
+  color: #555;
+}
 
-    p {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 40px;
+  gap: 20px;
+}
 
-    .button-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 40px;
-      gap: 20px;
-    }
+.game-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px 30px;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 1.5em;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-    .game-button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 20px 30px;
-      border: none;
-      border-radius: 15px;
-      text-decoration: none;
-      font-size: 1.2em;
-      transition: background-color 0.3s ease;
-    }
+.game-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
 
-    .game-button:hover {
-      background-color: #45a049;
-    }
+footer {
+  margin-top: 50px;
+  font-size: 1em;
+  color: #777;
+}
 
-    footer {
-      margin-top: 50px;
-      font-size: 0.9em;
-      color: #777;
-    }
+img {
+  margin-top: 30px;
+  width: 250px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-    img {
-      margin-top: 30px;
-      width: 200px;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Mini Game Zone</h1>
-    <p>Fun and learning games for kids!</p>
-    <p>High Score in Memory Game: <span id="highScore">0</span></p>
-<script>
-  document.getElementById('highScore').innerText = localStorage.getItem('memoryHighScore') || 0;
-</script>
-  </header>
-
-  <div class="button-container">
-    <a href="quick-math.html" class="game-button">Quick Math</a>
-    <a href="guess-number.html" class="game-button">Guess the Number</a>
-    <a href="rock-paper-scissors.html" class="game-button">Rock Paper Scissors</a>
-    <a href="memory-game.html" class="game-button">Memory Game</a>
-  </div>
-
-  <img src="https://cdn-icons-png.flaticon.com/512/1998/1998617.png" alt="Fun Game Image">
-
-  <footer>
-    <p>© 2025 Mini Game Zone. Created for fun learning!</p>
-  </footer>
-</body>
-</html>
+.high-score {
+  font-size: 1.5em;
+  color: #d9534f;
+  margin-top: 20px;
+}
