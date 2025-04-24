@@ -68,6 +68,10 @@
   <header>
     <h1>Mini Game Zone</h1>
     <p>Fun and learning games for kids!</p>
+    <p>High Score in Memory Game: <span id="highScore">0</span></p>
+<script>
+  document.getElementById('highScore').innerText = localStorage.getItem('memoryHighScore') || 0;
+</script>
   </header>
 
   <div class="button-container">
