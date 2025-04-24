@@ -1,170 +1,151 @@
-<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mini Game Zone</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Comic Sans MS', cursive;
-      background: linear-gradient(135deg, #e0f7fa, #e1bee7);
-      color: #333;
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game Zone</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #c2e9fb, #a1c4fd);
+            color: #333;
+        }header {
+        background-color: #005bea;
+        color: white;
+        padding: 1rem 2rem;
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+        font-size: 2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
     }
-    header {
-      background: #6a1b9a;
-      color: white;
-      padding: 20px 40px;
-      font-size: 2em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-weight: bold;
-    }
+
     .user-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+        font-size: 1rem;
     }
-    .user-info img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
+
     .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
     }
+
     .game-card {
-      background: white;
-      border-radius: 20px;
-      text-align: center;
-      padding: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
+        background-color: white;
+        border-radius: 20px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
     }
+
     .game-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(106, 27, 154, 0.5);
+        transform: translateY(-10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
-    .game-card img {
-      width: 100px;
-      height: 100px;
-    }
+
     .game-card h3 {
-      color: #6a1b9a;
+        font-family: 'Pacifico', cursive;
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
     }
-    .game-card a {
-      text-decoration: none;
-      background: #6a1b9a;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 10px;
-      display: inline-block;
-      margin-top: 10px;
+
+    .game-card p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
-    .info-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      color: #6a1b9a;
+
+    .play-btn {
+        background-color: #005bea;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
+
+    .play-btn:hover {
+        background-color: #0041b3;
     }
-    .modal-content {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      max-width: 400px;
-      text-align: center;
-    }
+
     footer {
-      text-align: center;
-      padding: 20px;
-      background: #6a1b9a;
-      color: white;
+        background-color: #005bea;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        font-family: 'Pacifico', cursive;
     }
-  </style>
-</head>
-<body onload="loadUser()">
-  <header>
-    <div class="logo">Mini Game Zone</div>
-    <div class="user-info">
-      <span id="userNameDisplay"></span>
-      <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="Avatar">
-    </div>
-  </header>
-  <div class="game-grid">
+
+    .firework {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: transparent;
+        pointer-events: none;
+        z-index: 999;
+    }
+</style>
+
+</head><body>
+    <header>
+        Mini Game Zone
+        <div class="user-info">Welcome, Ajay</div>
+    </header><main class="game-grid">
     <div class="game-card">
-      <span class="info-icon" onclick="showModal('Subway Surfers: Dodge trains and collect coins!')">?</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Subway Surfers">
-      <h3>Subway Surfers</h3>
-      <a href="subway-surfers.html">Play Now</a>
-    </div>
-    <div class="game-card">
-      <span class="info-icon" onclick="showModal('Candy Crush: Match candies to score points!')">?</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/4151/4151790.png" alt="Candy Crush">
-      <h3>Candy Crush</h3>
-      <a href="candy-crush.html">Play Now</a>
-    </div>
-    <div class="game-card">
-      <span class="info-icon" onclick="showModal('Tangle Rope: Untangle the ropes and clear the puzzle!')">?</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/679/679699.png" alt="Tangle Rope">
-      <h3>Tangle Rope</h3>
-      <a href="tangle-rope.html">Play Now</a>
+        <h3>Subway Surfers</h3>
+        <p>Dodge trains and collect coins!</p>
+        <button class="play-btn">Play Now</button>
     </div>
     <div class="game-card">
-      <span class="info-icon" onclick="showModal('Zombie Game: Defeat zombies and survive the attack!')">?</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/609/609803.png" alt="Zombie Game">
-      <h3>Zombie Game</h3>
-      <a href="zombie-game.html">Play Now</a>
+        <h3>Candy Crush</h3>
+        <p>Match candies to score points!</p>
+        <button class="play-btn">Play Now</button>
     </div>
     <div class="game-card">
-      <span class="info-icon" onclick="showModal('Temple Run: Run, jump and slide to escape!')">?</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111630.png" alt="Temple Run">
-      <h3>Temple Run</h3>
-      <a href="temple-run.html">Play Now</a>
+        <h3>Tangle Rope</h3>
+        <p>Untangle the ropes and clear the puzzle!</p>
+        <button class="play-btn">Play Now</button>
     </div>
-  </div>
-  <footer>
+    <div class="game-card">
+        <h3>Zombie Game</h3>
+        <p>Defeat zombies and survive the attack!</p>
+        <button class="play-btn">Play Now</button>
+    </div>
+    <div class="game-card">
+        <h3>Temple Run</h3>
+        <p>Run, jump and slide to escape!</p>
+        <button class="play-btn">Play Now</button>
+    </div>
+</main>
+
+<footer>
     © 2025 Mini Game Zone. All rights reserved.
-  </footer>  <div class="modal" id="gameModal">
-    <div class="modal-content">
-      <p id="modalText"></p>
-      <button onclick="hideModal()">Close</button>
-    </div>
-  </div>  <script>
-    function loadUser() {
-      const name = localStorage.getItem("userName");
-      if (!name) {
-        window.location.href = "login.html";
-      } else {
-        document.getElementById("userNameDisplay").textContent = "Welcome, " + name;
-      }
+</footer>
+
+<div class="firework" id="firework"></div>
+<script>
+    // Confetti/Fireworks Effect Placeholder
+    function showCelebration() {
+        const fw = document.getElementById('firework');
+        fw.style.background = "url('https://i.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.webp') center/cover no-repeat";
+        setTimeout(() => {
+            fw.style.background = "transparent";
+        }, 3000);
     }
 
-    function showModal(text) {
-      document.getElementById("modalText").textContent = text;
-      document.getElementById("gameModal").style.display = 'flex';
-    }
+    // Trigger celebration when game card clicked (for demo)
+    document.querySelectorAll('.play-btn').forEach(btn => {
+        btn.addEventListener('click', showCelebration);
+    });
+</script>
 
-    function hideModal() {
-      document.getElementById("gameModal").style.display = 'none';
-    }
-  </script></body>
-</html>
+</body></html>
