@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Game Zone</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background: #e6f0ff;
+      color: #000;
+    }header {
+  background: #007BFF;
+  color: white;
+  padding: 20px 40px;
+  font-size: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 40px;
+}
+
+.game-card {
+  background: white;
+  border-radius: 15px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+}
+
+.game-card img {
+  width: 100px;
+  height: 100px;
+}
+
+.game-card h3 {
+  color: #007BFF;
+}
+
+.game-card a {
+  text-decoration: none;
+  background: #007BFF;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #007BFF;
+  color: white;
+}
+
+  </style>
+</head>
+<body onload="loadUser()">
+  <header>
+    <div class="logo">Mini Game Zone</div>
+    <div class="user-info">
+      <span id="userNameDisplay"></span>
+      <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="Avatar">
+    </div>
+  </header>  <div class="game-grid">
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Subway Surfers">
+      <h3>Subway Surfers</h3>
+      <p>Dodge trains and collect coins!</p>
+      <a href="subway-surfers.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/4151/4151790.png" alt="Candy Crush">
+      <h3>Candy Crush</h3>
+      <p>Match candies to score points!</p>
+      <a href="candy-crush.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/679/679699.png" alt="Tangle Rope">
+      <h3>Tangle Rope</h3>
+      <p>Untangle the ropes and clear the puzzle!</p>
+      <a href="tangle-rope.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/609/609803.png" alt="Zombie Game">
+      <h3>Zombie Game</h3>
+      <p>Defeat zombies and survive the attack!</p>
+      <a href="zombie-game.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111630.png" alt="Temple Run">
+      <h3>Temple Run</h3>
+      <p>Run, jump and slide to escape!</p>
+      <a href="temple-run.html">Play Now</a>
+    </div>
+  </div>  <footer>
+    © 2025 Mini Game Zone. All rights reserved.
+  </footer>  <script>
+    function loadUser() {
+      const name = localStorage.getItem("userName");
+      if (!name) {
+        window.location.href = "login.html";
+      } else {
+        document.getElementById("userNameDisplay").textContent = "Welcome, " + name;
+      }
+    }
+  </script></body>
+</html>
