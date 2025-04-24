@@ -14,16 +14,16 @@
     body {
       margin: 0;
       font-family: 'Baloo 2', cursive;
-      background: linear-gradient(to bottom, #fef9d7, #fbd786);
-      color: #444;
+      background: linear-gradient(to bottom, #cceeff, #99ccff);
+      color: #003366;
     }
 
     header {
-      background: linear-gradient(45deg, #ff6b6b, #ffcc00);
+      background: linear-gradient(45deg, #007BFF, #00BFFF);
       color: white;
       padding: 40px 20px;
       text-align: center;
-      border-bottom: 5px solid #ffa500;
+      border-bottom: 5px solid #0066cc;
     }
 
     header h1 {
@@ -33,11 +33,27 @@
 
     header p {
       font-size: 1.4em;
-      margin: 10px 0 0;
+      margin: 10px 0;
+    }
+
+    .coin-counter {
+      background: #e0f0ff;
+      color: #003366;
+      display: inline-block;
+      padding: 10px 25px;
+      font-size: 1.2em;
+      border-radius: 25px;
+      margin-top: 15px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    .coin-counter i {
+      color: gold;
+      margin-right: 10px;
     }
 
     nav {
-      background-color: #ffb700;
+      background-color: #3399ff;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -50,14 +66,14 @@
       font-weight: bold;
       text-decoration: none;
       padding: 10px 20px;
-      background: #ff7f50;
+      background: #005f99;
       border-radius: 12px;
       transition: transform 0.2s;
     }
 
     nav a:hover {
       transform: scale(1.1);
-      background: #ff6347;
+      background: #004080;
     }
 
     .game-grid {
@@ -85,7 +101,7 @@
     .game-card i {
       font-size: 3em;
       margin-bottom: 15px;
-      color: #ff7f50;
+      color: #3399ff;
     }
 
     .game-card h3 {
@@ -96,7 +112,7 @@
     .game-card a {
       display: inline-block;
       margin-top: 10px;
-      background: #4CAF50;
+      background: #007BFF;
       color: white;
       padding: 10px 20px;
       text-decoration: none;
@@ -105,33 +121,37 @@
     }
 
     .game-card a:hover {
-      background: #388e3c;
+      background: #0056b3;
     }
 
-    .highscore {
-      font-size: 1.1em;
-      color: #333;
-      margin-top: 10px;
+    .funny-image {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .funny-image img {
+      max-width: 300px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     footer {
-      background: #ffcc00;
+      background: #3399ff;
       padding: 20px;
       text-align: center;
-      color: #333;
-      margin-top: 40px;
+      color: white;
       font-size: 0.95em;
     }
 
     .social-icons a {
       margin: 0 10px;
-      color: #444;
+      color: white;
       font-size: 1.4em;
       transition: color 0.3s;
     }
 
     .social-icons a:hover {
-      color: #ff4500;
+      color: #ffcc00;
     }
   </style>
 </head>
@@ -139,8 +159,10 @@
 
   <header>
     <h1>Mini Game Zone</h1>
-    <p>Play • Learn • Have Fun!</p>
-    <p class="highscore">Memory Game High Score: <span id="highScore">0</span></p>
+    <p>Play • Learn • Laugh!</p>
+    <div class="coin-counter">
+      <i class="fas fa-coins"></i> Overall Coins: <span id="totalCoins">0</span>
+    </div>
   </header>
 
   <nav>
@@ -173,6 +195,10 @@
     </div>
   </div>
 
+  <div class="funny-image">
+    <img src="https://i.imgur.com/3u1h7YF.png" alt="Funny cartoon character laughing" />
+  </div>
+
   <footer>
     <p>© 2025 Mini Game Zone. Created for fun learning!</p>
     <div class="social-icons">
@@ -183,7 +209,7 @@
   </footer>
 
   <script>
-    document.getElementById('highScore').innerText = localStorage.getItem('memoryHighScore') || 0;
+    document.getElementById('totalCoins').innerText = localStorage.getItem('totalCoins') || 0;
   </script>
 </body>
 </html>
