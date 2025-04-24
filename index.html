@@ -1,138 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mini Game Zone</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Comic Sans MS', cursive;
-      background: linear-gradient(to bottom, #add8e6, #ffc0cb);
-      color: #333;
-    }
+      font-family: 'Fredoka One', cursive;
+      background-color: #0f0f0f;
+      color: #fff;
+    }header {
+  padding: 20px;
+  text-align: center;
+  background-color: #1f1f1f;
+}
 
-    header {
-      text-align: center;
-      padding: 30px;
-      background-color: #ffccf9;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    }
+header h1 {
+  font-size: 3em;
+  margin: 0;
+  color: #ffcc00;
+}
 
-    h1 {
-      font-size: 3em;
-      color: #444;
-    }
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
 
-    p {
-      font-size: 1.2em;
-      margin: 5px 0;
-    }
+.game-card {
+  background-color: #1a1a1a;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
 
-    .welcome {
-      font-weight: bold;
-      color: #d63384;
-    }
+.game-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
+}
 
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      padding: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+.game-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
 
-    .game-card {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
+.game-card h3 {
+  margin: 10px;
+  font-size: 1.2em;
+  text-align: center;
+  color: #fff;
+}
 
-    .game-card:hover {
-      transform: scale(1.05);
-    }
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  color: #aaa;
+}
 
-    .game-card img {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-
-    .game-title {
-      font-size: 1.3em;
-      margin: 10px 0;
-    }
-
-    .play-button {
-      padding: 10px 20px;
-      background-color: #4fc3f7;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .play-button:hover {
-      background-color: #0288d1;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #eee;
-      margin-top: 40px;
-    }
   </style>
 </head>
 <body>
   <header>
     <h1>Mini Game Zone</h1>
-    <p class="welcome">Welcome, <span id="playerGreeting"></span>!</p>
-    <p>Total Coins: <span id="totalCoins">0</span></p>
-  </header>
-
-  <div class="game-grid">
-    <div class="game-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3163/3163845.png" alt="Quick Math">
-      <div class="game-title">Quick Math</div>
-      <button class="play-button" onclick="location.href='quick-math.html'">Play</button>
-    </div>
-    <div class="game-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/2847/2847267.png" alt="Guess the Number">
-      <div class="game-title">Guess the Number</div>
-      <button class="play-button" onclick="location.href='guess-number.html'">Play</button>
-    </div>
-    <div class="game-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/4151/4151630.png" alt="Rock Paper Scissors">
-      <div class="game-title">Rock Paper Scissors</div>
-      <button class="play-button" onclick="location.href='rock-paper-scissors.html'">Play</button>
-    </div>
-    <div class="game-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/2920/2920054.png" alt="Memory Game">
-      <div class="game-title">Memory Game</div>
-      <button class="play-button" onclick="location.href='memory-game.html'">Play</button>
-    </div>
-  </div>
-
-  <footer>
-    © 2025 Mini Game Zone. Created for fun learning!
+  </header>  <div class="game-grid">
+    <a href="memory-game.html" class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png" alt="Memory Game" />
+      <h3>Memory Game</h3>
+    </a>
+    <a href="fruit-ninja.html" class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/8832/8832807.png" alt="Fruit Ninja" />
+      <h3>Fruit Ninja</h3>
+    </a>
+    <a href="rock-paper-scissors.html" class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1048/1048953.png" alt="Rock Paper Scissors" />
+      <h3>Rock Paper Scissors</h3>
+    </a>
+    <a href="quick-math.html" class="game-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="Quick Math" />
+      <h3>Quick Math</h3>
+    </a>
+  </div>  <footer>
+    <p>© 2025 Mini Game Zone. Created for fun and learning!</p>
   </footer>
-
-  <script>
-    if (!localStorage.getItem('playerName')) {
-      window.location.href = 'login.html';
-    }
-
-    const player = localStorage.getItem('playerName');
-    document.getElementById('playerGreeting').innerText = player || 'Guest';
-    document.getElementById('totalCoins').innerText = localStorage.getItem('totalCoins') || 0;
-  </script>
 </body>
 </html>
