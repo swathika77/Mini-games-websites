@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Candy Crush - Level 1</title>
+  <style>
+    body {
+      background: #fdf1f1;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }h1 {
+  color: #e91e63;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+  gap: 2px;
+  margin: 0 auto;
+}
+
+.candy {
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  border-radius: 10px;
+  cursor: grab;
+}
+
+.info {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+#result {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 20px;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Candy Crush - Level 1</h1>
+  <div class="info">Moves left: <span id="moves">20</span> | Score: <span id="score">0</span> | Target: 1000</div>
+  <div id="grid"></div>
+  <div id="result"></div>  <script>
+    const grid = document.getElementById('grid');
+    const width = 8;
+    const candyImages = [
+      'red.png', 'yellow.png', 'green.png', 'blue.png', 'purple.png', 'orange.png'
+    ];
+    const targetScore = 1000;
+    let score = 0;
+    let moves = 20;
+    let squares = [];
+
+    function createBoard() {
+      for (let i = 0; i < width * width; i++) {
+        const square = document.createElement('div');
+        let candy = getRandomCandy();
+        square.style.backgroundImage = `url('img/${candy}')`;
+        square.setAttribute('draggable', true);
+        square.setAttribute('id', i);
+        square.classList.add('candy');
+        grid.appendChild(square);
+        squares.push(square);
+      }
+    }
+
+    function getRandomCandy() {
+      return candyImages[Math.floor(Math.random() * candyImages.length)];
+    }
+
+    let colorDragged, colorReplaced, idDragged, idReplaced;
+
+    function dragStart() {
+      colorDragged = this.style.backgroundImage;
+      idDragged = parseInt(this.id);
+    }
+
+    function dragDrop() {
+      colorReplaced = this.style.backgroundImage;
+      idReplaced = parseInt(this.id);
+      squares[idDragged].style.backgroundImage = colorReplaced;
+      squares[idReplaced].style.backgroundImage = colorDragged;
+    }
+
+    function dragEnd() {
+      const validMoves = [
+        idDragged - 1,
+        idDragged + 1,
+        idDragged - width,
+        idDragged + width
+      ];
+
+      const isValid = validMoves.includes(idReplaced);
+
+      if (idReplaced && isValid) {
+        moves--;
+        document.getElementById('moves').textContent = moves;
+      } else {
+        squares[idDragged].style.backgroundImage = colorDragged;
+        squares[idReplaced].style.backgroundImage = colorReplaced;
+      }
+      idReplaced = null;
+
+      checkMatches();
+    }
+
+    function checkMatches() {
+      checkRowForThree();
+      checkColumnForThree();
+      moveDown();
+      if (score >= targetScore) {
+        document.getElementById('result').textContent = 'Level Complete!';
+        stopGame();
+      } else if (moves === 0) {
+        document.getElementById('result').textContent = 'Game Over!';
+        stopGame();
+      }
+    }
+
+    function stopGame() {
+      squares.forEach(square => square.setAttribute('draggable', false));
+    }
+
+    function checkRowForThree() {
+      for (let i = 0; i < 61; i++) {
+        const row = [i, i + 1, i + 2];
+        let match = squares[i].style.backgroundImage;
+        const notValid = [6,7,14,15,22,23,30,31,38,39,46,47,54,55];
+        if (notValid.includes(i)) continue;
+        if (row.every(index => squares[index].style.backgroundImage === match)) {
+          row.forEach(index => squares[index].style.backgroundImage = '');
+          score += 150;
+          document.getElementById('score').textContent = score;
+        }
+      }
+    }
+
+    function checkColumnForThree() {
+      for (let i = 0; i < 47; i++) {
+        const column = [i, i + width, i + width * 2];
+        let match = squares[i].style.backgroundImage;
+        if (column.every(index => squares[index].style.backgroundImage === match)) {
+          column.forEach(index => squares[index].style.backgroundImage = '');
+          score += 150;
+          document.getElementById('score').textContent = score;
+        }
+      }
+    }
+
+    function moveDown() {
+      for (let i = 0; i < 56; i++) {
+        if (squares[i + width].style.backgroundImage === '') {
+          squares[i + width].style.backgroundImage = squares[i].style.backgroundImage;
+          squares[i].style.backgroundImage = '';
+        }
+      }
+      for (let i = 0; i < width; i++) {
+        if (squares[i].style.backgroundImage === '') {
+          squares[i].style.backgroundImage = `url('img/${getRandomCandy()}')`;
+        }
+      }
+    }
+
+    createBoard();
+    setInterval(() => {
+      checkMatches();
+    }, 150);
+
+    squares.forEach(square => {
+      square.addEventListener('dragstart', dragStart);
+      square.addEventListener('dragover', e => e.preventDefault());
+      square.addEventListener('drop', dragDrop);
+      square.addEventListener('dragend', dragEnd);
+    });
+  </script></body>
+</html>
