@@ -1,76 +1,57 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Mini Game Zone</title>
+  <title>Login</title>
   <style>
     body {
-      background: #111;
-      color: #fff;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
       display: flex;
+      height: 100vh;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      background: #111;
+      color: white;
+      font-family: 'Comic Sans MS', cursive;
     }
-
-    .login-container {
+    .login-box {
       background: #222;
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(243, 156, 18, 0.6);
       text-align: center;
-      width: 300px;
     }
-
-    h1 {
-      color: #f39c12;
-      margin-bottom: 20px;
-    }
-
     input {
-      width: 100%;
       padding: 10px;
+      border: none;
       margin-bottom: 20px;
-      border: none;
+      width: 200px;
       border-radius: 10px;
-      font-size: 1em;
     }
-
     button {
-      background: #f39c12;
-      color: #000;
-      border: none;
       padding: 10px 20px;
-      font-weight: bold;
+      background: orange;
+      border: none;
       border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #e67e22;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="login-container">
-    <h1>Welcome!</h1>
-    <input type="text" id="name" placeholder="Enter your name" required />
+  <div class="login-box">
+    <h2>Enter Your Name</h2>
+    <input type="text" id="username" placeholder="Your name" />
+    <br />
     <button onclick="login()">Login</button>
   </div>
 
   <script>
     function login() {
-      const name = document.getElementById("name").value.trim();
-      if (name) {
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("userName", name);
-        window.location.href = "index.html?welcome=true";
-      } else {
-        alert("Please enter your name!");
+      const name = document.getElementById("username").value;
+      if (name.trim() !== "") {
+        localStorage.setItem("username", name);
+        alert("Welcome, " + name + "!");
+        window.location.href = "index.html";
       }
     }
   </script>
