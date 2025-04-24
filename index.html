@@ -19,6 +19,7 @@
       padding: 50px;
       background: rgba(0, 0, 0, 0.5);
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      position: relative;
     }
 
     h1 {
@@ -145,20 +146,31 @@
       margin-top: 10px;
       font-size: 0.9em;
     }
+
+    /* User name in top-right corner */
+    .username {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.2em;
+      color: #fff;
+      font-weight: bold;
+    }
+
   </style>
 </head>
 <body>
   <header>
     <h1>Mini Game Zone</h1>
     <p>Fun & Learning Games for Kids</p>
+    <div class="username" id="username"></div> <!-- User's name will appear here -->
   </header>
 
   <!-- Login Section -->
   <div class="login-container" id="login-container">
     <h2>Login</h2>
     <form onsubmit="return validateLogin()">
-      <input type="text" id="username" placeholder="Username" required/>
-      <input type="password" id="password" placeholder="Password" required/>
+      <input type="text" id="name" placeholder="Enter your name" required/>
       <button type="submit" class="login-btn">Login</button>
     </form>
     <p class="error" id="error-message"></p>
@@ -206,7 +218,8 @@
       // Show game grid and hide login
       document.getElementById('login-container').style.display = 'none';
       document.getElementById('game-grid').style.display = 'grid';
-      // Retrieve and display stored scores
+      // Retrieve and display stored name and scores
+      document.getElementById('username').textContent = 'Welcome, ' + localStorage.getItem('userName');
       document.getElementById('memory-score').textContent = 'Score: ' + (localStorage.getItem('memoryScore') || 0);
       document.getElementById('fruit-ninja-score').textContent = 'Score: ' + (localStorage.getItem('fruitNinjaScore') || 0);
       document.getElementById('rock-paper-scissors-score').textContent = 'Score: ' + (localStorage.getItem('rockPaperScissorsScore') || 0);
@@ -215,18 +228,19 @@
 
     // Login validation function
     function validateLogin() {
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;
+      var name = document.getElementById('name').value;
 
-      // Simple validation check (you can customize this logic)
-      if (username === 'admin' && password === 'password123') {
-        localStorage.setItem('loggedIn', 'true');  // Save login status
-        // Redirect to the same page to load the game grid
-        location.reload();
-      } else {
-        document.getElementById('error-message').textContent = 'Invalid username or password!';
+      if (name.trim() === '') {
+        document.getElementById('error-message').textContent = 'Please enter your name!';
         return false;
       }
+
+      // Save user's name and login status in localStorage
+      localStorage.setItem('userName', name);
+      localStorage.setItem('loggedIn', 'true');
+
+      // Redirect to the same page to load the game grid
+      location.reload();
     }
   </script>
 </body>
